@@ -22,7 +22,7 @@ class ConcordanceController extends Controller
                     ->where('nama', 'like', '%' . $nama . '%')
                     ->pluck('filename')->toArray();
                 if (!empty($query)) {
-                    $response = $client->request('GET', 'https://api-corpus.mirfanrafif.me/getConc2?keyword=' . $keyword . '&tahun=' . urlencode(json_encode($query)));
+                    $response = $client->request('GET', 'http://localhost:8000/getConc2?keyword=' . $keyword . '&tahun=' . urlencode(json_encode($query)));
                     $data = json_decode($response->getBody()->getContents());
                     return view('concordance', compact('data'));
                 } else {
@@ -31,7 +31,7 @@ class ConcordanceController extends Controller
                 $query = Jurnal::where('tahun', $tahun)
                     ->pluck('filename')->toArray();
                 if (!empty($query)) {
-                    $response = $client->request('GET', 'https://api-corpus.mirfanrafif.me/getConc2?keyword=' . $keyword . '&tahun=' . urlencode(json_encode($query)));
+                    $response = $client->request('GET', 'https://localhost:8000/getConc2?keyword=' . $keyword . '&tahun=' . urlencode(json_encode($query)));
                     $data = json_decode($response->getBody()->getContents());
                     return view('concordance', compact('data'));
                 }
