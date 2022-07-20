@@ -72,7 +72,7 @@ class JurnalController extends Controller
     {
         $file = File::get(storage_path('app/public/jurnal/').$jurnal->file);
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', 'http://localhost:8000/getWordCount?file=' . $jurnal->filename);
+        $response = $client->request('GET', 'http://localhost:8000/getWordCount?file=' . $jurnal->file);
         $word = json_decode($response->getBody()->getContents());
         return view('admin.jurnal.show', compact([
             'jurnal',
@@ -116,6 +116,7 @@ class JurnalController extends Controller
             $timestamp = Carbon::now()->timestamp;
             $filename = $timestamp . '.' .$md5name. '.' .$request->nama. '.' . $file->getClientOriginalExtension();
             $file->storeAs($path, $filename);
+            // dd($filename);
             $input['file'] = $filename;
         }else{
             unset($input['file']);
