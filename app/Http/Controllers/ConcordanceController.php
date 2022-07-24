@@ -30,6 +30,7 @@ class ConcordanceController extends Controller
             } elseif ($tahun) {
                 $query = Jurnal::where('tahun', $tahun)
                     ->pluck('filename')->toArray();
+                // dd($query);
                 if (!empty($query)) {
                     $response = $client->request('GET', 'http://localhost:8000/getConc2?keyword=' . $keyword . '&tahun=' . urlencode(json_encode($query)));
                     $data = json_decode($response->getBody()->getContents());

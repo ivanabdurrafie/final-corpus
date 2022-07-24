@@ -58,12 +58,12 @@
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-12">
-                                        <table>
-                                            <tr>
-                                                <td class="text-justify">{{$file}}</td>
-                                            </tr>
-                                        </table>
+                                    <div class="col-12 text-justify">
+                                        @php
+                                            $f = $fileEncoded.utf8_decode($jurnal->file);
+                                            
+                                        @endphp
+                                        {{$f}}
                                     </div>
                                 </div>
 
